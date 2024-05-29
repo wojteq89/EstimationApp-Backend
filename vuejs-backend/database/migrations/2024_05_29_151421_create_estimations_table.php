@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('estimations', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->foreignId('project_id')->constrained()->onDelete('cascade');
+            $table->foreignId('client_id')->constrained()->onDelete('cascade');
+            $table->decimal('value', 10, 2);
             $table->timestamps();
         });
     }
