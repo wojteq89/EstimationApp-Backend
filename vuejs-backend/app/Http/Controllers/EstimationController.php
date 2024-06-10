@@ -7,13 +7,11 @@ use Illuminate\Http\Request;
 
 class EstimationController extends Controller
 {
-    // Pobierz wszystkie wyceny
     public function index()
     {
         return response()->json(Estimation::with('project.client')->get(), 200);
     }
 
-    // Pobierz konkretną wycenę
     public function show($id)
     {
         $estimation = Estimation::with('project.client')->find($id);
@@ -25,7 +23,6 @@ class EstimationController extends Controller
         return response()->json($estimation, 200);
     }
 
-    // Dodaj nową wycenę
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -42,7 +39,6 @@ class EstimationController extends Controller
         return response()->json($estimation, 201);
     }
 
-    // Zaktualizuj istniejącą wycenę
     public function update(Request $request, $id)
     {
         $estimation = Estimation::find($id);
@@ -65,7 +61,6 @@ class EstimationController extends Controller
         return response()->json($estimation, 200);
     }
 
-    // Usuń wycenę
     public function destroy($id)
     {
         $estimation = Estimation::find($id);

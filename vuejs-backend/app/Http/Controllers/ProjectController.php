@@ -7,13 +7,11 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
-    // Pobierz wszystkie projekty
     public function index()
     {
         return response()->json(Project::with('client')->get(), 200);
     }
 
-    // Pobierz konkretny projekt
     public function show($id)
     {
         $project = Project::with('client')->find($id);
@@ -25,13 +23,13 @@ class ProjectController extends Controller
         return response()->json($project, 200);
     }
 
-    // Dodaj nowy projekt
     public function store(Request $request)
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'client_id' => 'required|exists:clients,id',
+            'estimation' => 'required|numeric',
         ]);
 
         $project = Project::create($validatedData);
@@ -39,7 +37,6 @@ class ProjectController extends Controller
         return response()->json($project, 201);
     }
 
-    // Zaktualizuj istniejący projekt
     public function update(Request $request, $id)
     {
         $project = Project::find($id);
@@ -59,7 +56,6 @@ class ProjectController extends Controller
         return response()->json($project, 200);
     }
 
-    // Usuń projekt
     public function destroy($id)
     {
         $project = Project::find($id);

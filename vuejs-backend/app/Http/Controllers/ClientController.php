@@ -7,13 +7,11 @@ use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    // Pobierz wszystkie klienty
     public function index()
     {
         return response()->json(Client::all(), 200);
     }
 
-    // Pobierz konkretnego klienta
     public function show($id)
     {
         $client = Client::find($id);
@@ -25,11 +23,11 @@ class ClientController extends Controller
         return response()->json($client, 200);
     }
 
-    // Dodaj nowego klienta
     public function store(Request $request)
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
             'logo' => 'nullable|string|max:255',
             'country' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:clients',
@@ -40,7 +38,6 @@ class ClientController extends Controller
         return response()->json($client, 201);
     }
 
-    // Zaktualizuj istniejącego klienta
     public function update(Request $request, $id)
     {
         $client = Client::find($id);
@@ -61,7 +58,6 @@ class ClientController extends Controller
         return response()->json($client, 200);
     }
 
-    // Usuń klienta
     public function destroy($id)
     {
         $client = Client::find($id);
