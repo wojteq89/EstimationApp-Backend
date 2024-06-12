@@ -29,6 +29,7 @@ class EstimationController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'project_id' => 'required|exists:projects,id',
+            'client_id' => 'required|exists:clients,id',
             'date' => 'required|date',
             'type' => 'required|in:hourly,fixed',
             'amount' => 'required|numeric',
@@ -38,6 +39,7 @@ class EstimationController extends Controller
 
         return response()->json($estimation, 201);
     }
+
 
     public function update(Request $request, $id)
     {
@@ -51,6 +53,7 @@ class EstimationController extends Controller
             'name' => 'sometimes|required|string|max:255',
             'description' => 'sometimes|nullable|string',
             'project_id' => 'sometimes|required|exists:projects,id',
+            'client_id' => 'required|exists:clients,id',
             'date' => 'sometimes|required|date',
             'type' => 'sometimes|required|in:hourly,fixed',
             'amount' => 'sometimes|required|numeric',
