@@ -36,7 +36,6 @@ class ProjectController extends Controller
     
         $project = Project::create($validatedData);
     
-        // Obliczanie i zapisanie nowej wartości estimation
         $project->estimation = $project->calculateEstimation();
         $project->save();
     
@@ -60,7 +59,6 @@ class ProjectController extends Controller
     
         $project->update($validatedData);
     
-        // Obliczanie i zapisanie nowej wartości estimation
         $project->estimation = $project->calculateEstimation();
         $project->save();
     
