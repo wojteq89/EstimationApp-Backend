@@ -19,6 +19,8 @@ class ProjectController extends Controller
         if (is_null($project)) {
             return response()->json(['message' => 'Project not found'], 404);
         }
+        $project->estimation = $project->calculateEstimation();
+        $project->save();
 
         return response()->json($project, 200);
     }
@@ -29,30 +31,39 @@ class ProjectController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'client_id' => 'required|exists:clients,id',
-            'estimation' => 'required|numeric',
+            'estimation' => 'nullable|numeric',
         ]);
-
+    
         $project = Project::create($validatedData);
-
+    
+        // Obliczanie i zapisanie nowej wartości estimation
+        $project->estimation = $project->calculateEstimation();
+        $project->save();
+    
         return response()->json($project, 201);
     }
-
+    
     public function update(Request $request, $id)
     {
         $project = Project::find($id);
-
+    
         if (is_null($project)) {
             return response()->json(['message' => 'Project not found'], 404);
         }
-
+    
         $validatedData = $request->validate([
             'name' => 'sometimes|required|string|max:255',
             'description' => 'sometimes|nullable|string',
             'client_id' => 'sometimes|required|exists:clients,id',
+            'estimation' => 'sometimes|nullable|numeric',
         ]);
-
+    
         $project->update($validatedData);
-
+    
+        // Obliczanie i zapisanie nowej wartości estimation
+        $project->estimation = $project->calculateEstimation();
+        $project->save();
+    
         return response()->json($project, 200);
     }
 
