@@ -22,4 +22,14 @@ class Project extends Model
     {
         return $this->estimations()->sum('amount');
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::updated(function ($project) {
+            if ($project->isDirty('client_id')) {
+                $project->estimations()->update(['client_id' => $project->client_id]);
+            }
+        });
+    }
 }

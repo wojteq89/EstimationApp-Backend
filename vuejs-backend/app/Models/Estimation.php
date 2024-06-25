@@ -12,4 +12,9 @@ class Estimation extends Model
     {
         return $this->belongsTo(Project::class);
     }
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class, 'client_id', 'id')->via('project');
+    }
 }

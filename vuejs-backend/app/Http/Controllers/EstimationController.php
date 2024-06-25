@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Estimation;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class EstimationController extends Controller
@@ -29,14 +30,23 @@ class EstimationController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'project_id' => 'required|exists:projects,id',
-            'client_id' => 'required|exists:clients,id',
             'date' => 'required|date',
             'type' => 'required|in:hourly,fixed',
             'amount' => 'required|numeric',
         ]);
-
-        $estimation = Estimation::create($validatedData);
-
+    
+        $project = Project::findOrFail($validatedData['project_id']);
+    
+        $estimation = Estimation::create([
+            'name' => $validatedData['name'],
+            'description' => $validatedData['description'],
+            'project_id' => $validatedData['project_id'],
+            'client_id' => $project->client_id,
+            'date' => $validatedData['date'],
+            'type' => $validatedData['type'],
+            'amount' => $validatedData['amount'],
+        ]);
+    
         return response()->json($estimation, 201);
     }
 
