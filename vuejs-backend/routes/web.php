@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\EstimationController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +38,7 @@ Route::get('/api/estimations/{id}', [EstimationController::class, 'show']);
 Route::post('/api/estimations', [EstimationController::class, 'store']);
 Route::put('/api/estimations/{id}', [EstimationController::class, 'update']);
 Route::delete('/api/estimations/{id}', [EstimationController::class, 'destroy']);
+
+Route::post('/api/register', [AuthController::class, 'register']);
+Route::post('/api/login', [AuthController::class, 'login']);
+
