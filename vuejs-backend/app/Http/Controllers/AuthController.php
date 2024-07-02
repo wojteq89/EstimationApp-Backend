@@ -42,10 +42,10 @@ class AuthController extends Controller
             return response()->json(['error' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
         }
     
-        $user = Auth::user();  // Fetch authenticated user
+        $user = Auth::user();
         return response()->json([
             'token' => $token,
-            'nickname' => $user->name  // Assuming 'name' field stores the nickname
+            'nickname' => $user->name
         ], Response::HTTP_OK);
     }
 }
