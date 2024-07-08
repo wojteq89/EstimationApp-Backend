@@ -45,7 +45,8 @@ class AuthController extends Controller
         $user = Auth::user();
         return response()->json([
             'token' => $token,
-            'nickname' => $user->name
+            'nickname' => $user->name,
+            'role' => $user->role,
         ], Response::HTTP_OK);
     }
 }

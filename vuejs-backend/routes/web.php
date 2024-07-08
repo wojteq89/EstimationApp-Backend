@@ -39,6 +39,9 @@ Route::post('/api/estimations', [EstimationController::class, 'store']);
 Route::put('/api/estimations/{id}', [EstimationController::class, 'update']);
 Route::delete('/api/estimations/{id}', [EstimationController::class, 'destroy']);
 
+Route::get('/api/users', [UserController::class, 'index']);
+
+
 Route::post('/api/register', [AuthController::class, 'register']);
 Route::post('/api/login', [AuthController::class, 'login']);
 
