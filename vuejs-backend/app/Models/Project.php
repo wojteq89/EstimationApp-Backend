@@ -23,6 +23,12 @@ class Project extends Model
         return $this->estimations()->sum('amount');
     }
 
+    public function updateEstimationSum()
+    {
+        $this->estimation = $this->estimations()->sum('amount');
+        $this->save();
+    }
+
     protected static function boot()
     {
         parent::boot();
