@@ -12,23 +12,19 @@ class Estimation extends Model
     {
         parent::boot();
 
-        // Zdarzenie po utworzeniu nowej wyceny
         static::created(function ($estimation) {
             $estimation->updateProjectEstimationSum();
         });
 
-        // Zdarzenie po aktualizacji istniejącej wyceny
         static::updated(function ($estimation) {
             $estimation->updateProjectEstimationSum();
         });
 
-        // Zdarzenie po usunięciu wyceny
         static::deleted(function ($estimation) {
             $estimation->updateProjectEstimationSum();
         });
     }
 
-    // Metoda do aktualizacji sumy wycen w projekcie
     public function updateProjectEstimationSum()
     {
         $project = $this->project;

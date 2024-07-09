@@ -1,11 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\EstimationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PasswordResetController;
 
 
 /*
@@ -22,6 +24,8 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes(['verify' => true, 'reset' => true]);
 
 Route::get('/api/clients', [ClientController::class, 'index']);
 Route::get('/api/clients/{id}', [ClientController::class, 'show']);
@@ -50,3 +54,5 @@ Route::delete('/api/users/{id}', [UserController::class, 'destroy']);
 Route::post('/api/register', [AuthController::class, 'register']);
 Route::post('/api/login', [AuthController::class, 'login']);
 
+Route::post('/api/password/reset-request', 'App\Http\Controllers\PasswordResetController@sendResetLinkEmail')->name('password.email');
+Route::post('/api/password/reset', 'App\Http\Controllers\PasswordResetController@reset')->name('password.update');
