@@ -40,30 +40,27 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
+        $estimation = Estimation::find($id);
     
-        if (is_null($user)) {
-            return response()->json(['message' => 'User not found'], 404);
+        if (is_null($estimation)) {
+            return response()->json(['message' => 'Estimation not found'], 404);
         }
     
         $validatedData = $request->validate([
             'name' => 'sometimes|required|string|max:255',
-            'email' => 'sometimes|required|string|email|max:255|unique:users,email,' . $id,
-            'password' => 'sometimes|required|string|min:8',
-            'role' => 'sometimes|required|in:user,admin',
+            'description' => 'sometimes|nullable|string',
+            'project_id' => 'sometimes|required|exists:projects,id',
+            'date' => 'sometimes|required|date',
+            'type' => 'sometimes|required|in:hourly,fixed',
+            'amount' => 'sometimes|required|numeric',
         ]);
     
-        if ($request->has('password')) {
-            $validatedData['password'] = bcrypt($request->input('password'));
-        }
+        $project = Project::with('client')->findOrFail($validatedData['project_id']);
+        $validatedData['client_id'] = $project->client->id;
     
-        if ($request->has('role')) {
-            $user->role = $request->input('role');
-        }
+        $estimation->update($validatedData);
     
-        $user->update($validatedData);
-    
-        return response()->json($user, 200);
+        return response()->json($estimation, 200);
     }
 
     public function destroy($id)

@@ -54,23 +54,26 @@ class EstimationController extends Controller
     public function update(Request $request, $id)
     {
         $estimation = Estimation::find($id);
-
+    
         if (is_null($estimation)) {
             return response()->json(['message' => 'Estimation not found'], 404);
         }
-
+    
         $validatedData = $request->validate([
             'name' => 'sometimes|required|string|max:255',
             'description' => 'sometimes|nullable|string',
             'project_id' => 'sometimes|required|exists:projects,id',
-            'client_id' => 'required|exists:clients,id',
             'date' => 'sometimes|required|date',
             'type' => 'sometimes|required|in:hourly,fixed',
             'amount' => 'sometimes|required|numeric',
         ]);
-
+    
+        $project = Project::with('client')->findOrFail($validatedData['project_id']);
+    
+        $validatedData['client_id'] = $project->client->id;
+    
         $estimation->update($validatedData);
-
+    
         return response()->json($estimation, 200);
     }
 
