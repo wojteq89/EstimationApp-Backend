@@ -5,6 +5,8 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\EstimationController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +42,10 @@ Route::put('/api/estimations/{id}', [EstimationController::class, 'update']);
 Route::delete('/api/estimations/{id}', [EstimationController::class, 'destroy']);
 
 Route::get('/api/users', [UserController::class, 'index']);
-
+Route::get('/api/users/{id}', [UserController::class, 'show']);
+Route::post('/api/users', [UserController::class, 'store']);
+Route::put('/api/users/{id}', [UserController::class, 'update']);
+Route::delete('/api/users/{id}', [UserController::class, 'destroy']);
 
 Route::post('/api/register', [AuthController::class, 'register']);
 Route::post('/api/login', [AuthController::class, 'login']);
