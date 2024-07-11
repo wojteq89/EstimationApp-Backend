@@ -57,5 +57,5 @@ Route::post('/api/login', [AuthController::class, 'login']);
 Route::post('/api/reset-request', [ResetPasswordController::class, 'sendResetLinkEmail'])
     ->name('password.email');
     
-Route::post('/api/reset-nword', [ResetPasswordController::class, 'reset'])
+Route::post('/api/reset-password', [ResetPasswordController::class, 'reset'])
     ->name('password.update');
