@@ -7,7 +7,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\EstimationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 
 
 /*
@@ -54,5 +54,8 @@ Route::delete('/api/users/{id}', [UserController::class, 'destroy']);
 Route::post('/api/register', [AuthController::class, 'register']);
 Route::post('/api/login', [AuthController::class, 'login']);
 
-Route::post('/api/password/reset-request', 'App\Http\Controllers\PasswordResetController@sendResetLinkEmail')->name('password.email');
-Route::post('/api/password/reset', 'App\Http\Controllers\PasswordResetController@reset')->name('password.update');
+Route::post('/api/reset-request', [ResetPasswordController::class, 'sendResetLinkEmail'])
+    ->name('password.email');
+    
+Route::post('/api/reset-nword', [ResetPasswordController::class, 'reset'])
+    ->name('password.update');
