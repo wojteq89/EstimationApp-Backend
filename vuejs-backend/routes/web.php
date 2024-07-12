@@ -27,35 +27,46 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true, 'reset' => true]);
 
-Route::get('/api/clients', [ClientController::class, 'index']);
-Route::get('/api/clients/{id}', [ClientController::class, 'show']);
-Route::post('/api/clients', [ClientController::class, 'store']);
-Route::put('/api/clients/{id}', [ClientController::class, 'update']);
-Route::delete('/api/clients/{id}', [ClientController::class, 'destroy']);
-
-Route::get('/api/projects', [ProjectController::class, 'index']);
-Route::get('/api/projects/{id}', [ProjectController::class, 'show']);
-Route::post('/api/projects', [ProjectController::class, 'store']);
-Route::put('/api/projects/{id}', [ProjectController::class, 'update']);
-Route::delete('/api/projects/{id}', [ProjectController::class, 'destroy']);
-
-Route::get('/api/estimations', [EstimationController::class, 'index']);
-Route::get('/api/estimations/{id}', [EstimationController::class, 'show']);
-Route::post('/api/estimations', [EstimationController::class, 'store']);
-Route::put('/api/estimations/{id}', [EstimationController::class, 'update']);
-Route::delete('/api/estimations/{id}', [EstimationController::class, 'destroy']);
-
-Route::get('/api/users', [UserController::class, 'index']);
-Route::get('/api/users/{id}', [UserController::class, 'show']);
-Route::post('/api/users', [UserController::class, 'store']);
-Route::put('/api/users/{id}', [UserController::class, 'update']);
-Route::delete('/api/users/{id}', [UserController::class, 'destroy']);
-
-Route::post('/api/register', [AuthController::class, 'register']);
-Route::post('/api/login', [AuthController::class, 'login']);
-
-Route::post('/api/reset-request', [ResetPasswordController::class, 'sendResetLinkEmail'])
-    ->name('password.email');
+Route::prefix('api')->group(function () {
     
-Route::post('/api/reset-password', [ResetPasswordController::class, 'reset'])
-    ->name('password.update');
+    Route::prefix('clients')->group(function () {
+        Route::get('/', [ClientController::class, 'index']);
+        Route::get('/{id}', [ClientController::class, 'show']);
+        Route::post('/', [ClientController::class, 'store']);
+        Route::put('/{id}', [ClientController::class, 'update']);
+        Route::delete('/{id}', [ClientController::class, 'destroy']);
+    });
+
+    Route::prefix('projects')->group(function () {
+        Route::get('/', [ProjectController::class, 'index']);
+        Route::get('/{id}', [ProjectController::class, 'show']);
+        Route::post('/', [ProjectController::class, 'store']);
+        Route::put('/{id}', [ProjectController::class, 'update']);
+        Route::delete('/{id}', [ProjectController::class, 'destroy']);
+    });
+
+    Route::prefix('estimations')->group(function () {
+        Route::get('/', [EstimationController::class, 'index']);
+        Route::get('/{id}', [EstimationController::class, 'show']);
+        Route::post('/', [EstimationController::class, 'store']);
+        Route::put('/{id}', [EstimationController::class, 'update']);
+        Route::delete('/{id}', [EstimationController::class, 'destroy']);
+    });
+
+    Route::prefix('users')->group(function () {
+        Route::get('/', [UserController::class, 'index']);
+        Route::get('/{id}', [UserController::class, 'show']);
+        Route::post('/', [UserController::class, 'store']);
+        Route::put('/{id}', [UserController::class, 'update']);
+        Route::delete('/{id}', [UserController::class, 'destroy']);
+    });
+
+
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/login', [AuthController::class, 'login']);
+
+    Route::post('/reset-request', [ResetPasswordController::class, 'sendResetLinkEmail'])
+        ->name('password.email');
+    Route::post('/reset-password', [ResetPasswordController::class, 'reset'])
+        ->name('password.update');
+});

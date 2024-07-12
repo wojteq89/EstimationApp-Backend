@@ -4,19 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
     public function index()
     {
-        return response()->json(User::all(), 200);
+        $users = User::all();
+        return response()->json($users, 200);
     }
 
     public function show($id)
     {
         $user = User::find($id);
 
-        if (is_null($user)) {
+        if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
 
@@ -27,11 +30,12 @@ class UserController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|email|unique:users,email|max:255',
             'password' => 'required|string|min:8',
+            'role' => ['required', 'string', Rule::in(['user', 'admin'])],
         ]);
 
-        $validatedData['password'] = bcrypt($request->input('password'));
+        $validatedData['password'] = Hash::make($request->input('password'));
 
         $user = User::create($validatedData);
 
@@ -40,34 +44,28 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        $estimation = Estimation::find($id);
+        $user = User::find($id);
     
-        if (is_null($estimation)) {
-            return response()->json(['message' => 'Estimation not found'], 404);
+        if (is_null($user)) {
+            return response()->json(['message' => 'User not found'], 404);
         }
     
         $validatedData = $request->validate([
             'name' => 'sometimes|required|string|max:255',
-            'description' => 'sometimes|nullable|string',
-            'project_id' => 'sometimes|required|exists:projects,id',
-            'date' => 'sometimes|required|date',
-            'type' => 'sometimes|required|in:hourly,fixed',
-            'amount' => 'sometimes|required|numeric',
-        ]);
+            'email' => 'sometimes|required|string|email|max:255|unique:users,email,' . $id,
+            'role' => ['sometimes', 'required', 'string', Rule::in(['user', 'admin'])],
+        ]);        
     
-        $project = Project::with('client')->findOrFail($validatedData['project_id']);
-        $validatedData['client_id'] = $project->client->id;
+        $user->update($validatedData);
     
-        $estimation->update($validatedData);
-    
-        return response()->json($estimation, 200);
+        return response()->json($user, 200);
     }
 
     public function destroy($id)
     {
         $user = User::find($id);
 
-        if (is_null($user)) {
+        if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
 
