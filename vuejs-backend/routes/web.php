@@ -69,4 +69,4 @@ Route::prefix('api')->group(function () {
         ->name('password.email');
     Route::post('/reset-password', [ResetPasswordController::class, 'reset'])
         ->name('password.update');
-});
+    });
