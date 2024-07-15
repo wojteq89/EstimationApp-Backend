@@ -78,12 +78,10 @@ Route::prefix('api')->group(function () {
         });
     });
 
-    Route::middleware(['auth:api', 'check.role:admin,user'])->group(function () {
         Route::post('/reset-request', [ResetPasswordController::class, 'sendResetLinkEmail'])
             ->name('password.email');
         Route::post('/reset-password', [ResetPasswordController::class, 'reset'])
             ->name('password.update');
-        });
         
         Route::post('/register', [AuthController::class, 'register']);
         Route::post('/login', [AuthController::class, 'login']);
