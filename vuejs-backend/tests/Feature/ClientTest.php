@@ -31,6 +31,14 @@ class ClientTest extends TestCase
             "password" => "password123",
         ]);
 
+        $this->client = Client::create([
+            "name" => "Test Client",
+            "description" => "Description of Test Client",
+            "logo" => "test_client_logo.png",
+            "country" => "Poland",
+            "email" => "test_client@example.com",
+        ]);
+
         $this->token = $response->json('token');
     }
 
@@ -74,19 +82,18 @@ class ClientTest extends TestCase
      */
     public function it_can_update_a_client()
     {
-        $client = Client::factory()->create(); // Tworzymy nowego klienta
 
         $data = [
             "name" => "Updated Client Name",
             "description" => "Updated description",
             "logo" => "updated_logo.png",
             "country" => "Updated Country",
-            "email" => "updatedClient@example.com", // Przykładowy email dla aktualizacji
+            "email" => "updatedClient@example.com",
         ];
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $this->token,
-        ])->putJson("{$this->baseUrl}/api/clients/{$client->id}", $data);
+        ])->putJson("{$this->baseUrl}/api/clients/{$this->client->id}", $data);
 
         $response->assertStatus(200);
         $this->assertDatabaseHas('clients', [
@@ -99,15 +106,13 @@ class ClientTest extends TestCase
      */
     public function it_can_delete_a_client()
     {
-        $client = Client::factory()->create();
-
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $this->token,
-        ])->delete("{$this->baseUrl}/api/clients/{$client->id}");
+        ])->delete("{$this->baseUrl}/api/clients/{$this->client->id}");
 
         $response->assertStatus(204);
 
-        $deletedClient = Client::find($client->id);
+        $deletedClient = Client::find($this->client->id);
         $this->assertNull($deletedClient, 'Failed to delete client from database.');
     }
 
