@@ -37,6 +37,11 @@ class AuthTest extends TestCase
         $this->assertDatabaseHas('users', [
             'email' => 'john@example.com'
         ]);
+
+        $this->registeredUser = [
+            "email" => "john@example.com",
+            "password" => "password123",
+        ];
     }
 
     /**
@@ -44,20 +49,26 @@ class AuthTest extends TestCase
      */
     public function it_can_login_a_user()
     {
-        $user = User::factory()->create([
-            'email' => 'john@example.com',
-            'password' => bcrypt('password123')
-        ]);
-
         $data = [
+            "name" => "John Doe",
+            "email" => "john@example.com",
+            "password" => "password123",
+            "password_confirmation" => "password123",
+            "role" => "admin"
+        ];
+
+        $response = $this->postJson("{$this->baseUrl}/api/register", $data);
+        $response->assertStatus(201);
+
+        $loginData = [
             "email" => "john@example.com",
             "password" => "password123",
         ];
 
-        $response = $this->postJson("{$this->baseUrl}/api/login", $data);
-        $response->assertStatus(200);
+        $loginResponse = $this->postJson("{$this->baseUrl}/api/login", $loginData);
+        $loginResponse->assertStatus(200);
 
-        $response->assertJsonStructure([
+        $loginResponse->assertJsonStructure([
             'token'
         ]);
     }
