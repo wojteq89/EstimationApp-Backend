@@ -18,9 +18,7 @@ class AuthTest extends TestCase
         $this->baseUrl = 'http://127.0.0.1:8000';
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]   
     public function it_can_register_a_user()
     {
         $data = [
@@ -44,9 +42,7 @@ class AuthTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_login_a_user()
     {
         $data = [

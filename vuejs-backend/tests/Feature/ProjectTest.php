@@ -52,9 +52,7 @@ class ProjectTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_fetch_projects()
     {
         $response = $this->withHeaders([
@@ -64,9 +62,22 @@ class ProjectTest extends TestCase
         $response->assertStatus(200);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function it_can_show_a_project()
+    {
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $this->token,
+        ])->get("{$this->baseUrl}/api/projects/{$this->project->id}");
+
+        $response->assertStatus(200)
+            ->assertJson([
+                'id' => $this->project->id,
+                'name' => $this->project->name,
+                'description' => $this->project->description,
+            ]);
+    }
+
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_create_a_project()
     {
         $projectData = [
@@ -86,26 +97,7 @@ class ProjectTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
-    public function it_can_show_a_project()
-    {
-        $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $this->token,
-        ])->get("{$this->baseUrl}/api/projects/{$this->project->id}");
-
-        $response->assertStatus(200)
-            ->assertJson([
-                'id' => $this->project->id,
-                'name' => $this->project->name,
-                'description' => $this->project->description,
-            ]);
-    }
-
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_update_a_project()
     {
         $data = [
@@ -125,9 +117,7 @@ class ProjectTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_delete_a_project()
     {
         $response = $this->withHeaders([

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="C:\MAMP\htdocs\backend\vuejs-backend\phpunit.xml" tests="23" assertions="42" errors="0" failures="0" skipped="0" time="4.619344">
+    <testsuite name="Unit" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.009639">
+      <testsuite name="Tests\Unit\ExampleTest" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Unit\ExampleTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.009639">
+        <testcase name="test_that_true_is_true" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Unit\ExampleTest.php" line="12" class="Tests\Unit\ExampleTest" classname="Tests.Unit.ExampleTest" assertions="1" time="0.009639"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="Feature" tests="22" assertions="41" errors="0" failures="0" skipped="0" time="4.609705">
+      <testsuite name="Tests\Feature\AuthTest" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Feature\AuthTest.php" tests="2" assertions="5" errors="0" failures="0" skipped="0" time="2.752029">
+        <testcase name="it_can_register_a_user" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Feature\AuthTest.php" line="22" class="Tests\Feature\AuthTest" classname="Tests.Feature.AuthTest" assertions="2" time="2.660323"/>
+        <testcase name="it_can_login_a_user" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Feature\AuthTest.php" line="46" class="Tests\Feature\AuthTest" classname="Tests.Feature.AuthTest" assertions="3" time="0.091706"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\ClientTest" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Feature\ClientTest.php" tests="5" assertions="9" errors="0" failures="0" skipped="0" time="0.477862">
+        <testcase name="it_can_fetch_clients" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Feature\ClientTest.php" line="46" class="Tests\Feature\ClientTest" classname="Tests.Feature.ClientTest" assertions="1" time="0.124736"/>
+        <testcase name="it_can_show_a_client" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Feature\ClientTest.php" line="56" class="Tests\Feature\ClientTest" classname="Tests.Feature.ClientTest" assertions="2" time="0.117841"/>
+        <testcase name="it_can_create_a_client" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Feature\ClientTest.php" line="74" class="Tests\Feature\ClientTest" classname="Tests.Feature.ClientTest" assertions="2" time="0.077580"/>
+        <testcase name="it_can_update_a_client" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Feature\ClientTest.php" line="95" class="Tests\Feature\ClientTest" classname="Tests.Feature.ClientTest" assertions="2" time="0.077059"/>
+        <testcase name="it_can_delete_a_client" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Feature\ClientTest.php" line="117" class="Tests\Feature\ClientTest" classname="Tests.Feature.ClientTest" assertions="2" time="0.080645"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\EstimationTest" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Feature\EstimationTest.php" tests="5" assertions="9" errors="0" failures="0" skipped="0" time="0.522480">
+        <testcase name="it_can_fetch_estimations" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Feature\EstimationTest.php" line="68" class="Tests\Feature\EstimationTest" classname="Tests.Feature.EstimationTest" assertions="1" time="0.111363"/>
+        <testcase name="it_can_show_an_estimation" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Feature\EstimationTest.php" line="78" class="Tests\Feature\EstimationTest" classname="Tests.Feature.EstimationTest" assertions="2" time="0.106177"/>
+        <testcase name="it_can_create_an_estimation" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Feature\EstimationTest.php" line="92" class="Tests\Feature\EstimationTest" classname="Tests.Feature.EstimationTest" assertions="2" time="0.111372"/>
+        <testcase name="it_can_update_an_estimation" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Feature\EstimationTest.php" line="117" class="Tests\Feature\EstimationTest" classname="Tests.Feature.EstimationTest" assertions="2" time="0.104403"/>
+        <testcase name="it_can_delete_an_estimation" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Feature\EstimationTest.php" line="141" class="Tests\Feature\EstimationTest" classname="Tests.Feature.EstimationTest" assertions="2" time="0.089166"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\ProjectTest" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Feature\ProjectTest.php" tests="5" assertions="9" errors="0" failures="0" skipped="0" time="0.443121">
+        <testcase name="it_can_fetch_projects" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Feature\ProjectTest.php" line="56" class="Tests\Feature\ProjectTest" classname="Tests.Feature.ProjectTest" assertions="1" time="0.105280"/>
+        <testcase name="it_can_show_a_project" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Feature\ProjectTest.php" line="66" class="Tests\Feature\ProjectTest" classname="Tests.Feature.ProjectTest" assertions="2" time="0.089902"/>
+        <testcase name="it_can_create_a_project" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Feature\ProjectTest.php" line="81" class="Tests\Feature\ProjectTest" classname="Tests.Feature.ProjectTest" assertions="2" time="0.078676"/>
+        <testcase name="it_can_update_a_project" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Feature\ProjectTest.php" line="101" class="Tests\Feature\ProjectTest" classname="Tests.Feature.ProjectTest" assertions="2" time="0.092024"/>
+        <testcase name="it_can_delete_a_project" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Feature\ProjectTest.php" line="121" class="Tests\Feature\ProjectTest" classname="Tests.Feature.ProjectTest" assertions="2" time="0.077239"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\UserTest" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Feature\UserTest.php" tests="5" assertions="9" errors="0" failures="0" skipped="0" time="0.414213">
+        <testcase name="it_can_fetch_users" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Feature\UserTest.php" line="41" class="Tests\Feature\UserTest" classname="Tests.Feature.UserTest" assertions="1" time="0.067001"/>
+        <testcase name="it_can_show_a_user" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Feature\UserTest.php" line="51" class="Tests\Feature\UserTest" classname="Tests.Feature.UserTest" assertions="2" time="0.082577"/>
+        <testcase name="it_can_create_a_user" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Feature\UserTest.php" line="67" class="Tests\Feature\UserTest" classname="Tests.Feature.UserTest" assertions="2" time="0.085083"/>
+        <testcase name="it_can_update_a_user" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Feature\UserTest.php" line="87" class="Tests\Feature\UserTest" classname="Tests.Feature.UserTest" assertions="2" time="0.089458"/>
+        <testcase name="it_can_delete_a_user" file="C:\MAMP\htdocs\backend\vuejs-backend\tests\Feature\UserTest.php" line="111" class="Tests\Feature\UserTest" classname="Tests.Feature.UserTest" assertions="2" time="0.090095"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

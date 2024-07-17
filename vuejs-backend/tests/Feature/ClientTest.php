@@ -42,9 +42,7 @@ class ClientTest extends TestCase
         $this->token = $response->json('token');
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_fetch_clients()
     {
         $response = $this->withHeaders([
@@ -54,9 +52,25 @@ class ClientTest extends TestCase
         $response->assertStatus(200);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function it_can_show_a_client()
+    {
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $this->token,
+        ])->get("{$this->baseUrl}/api/clients/{$this->client->id}");
+
+        $response->assertStatus(200)
+            ->assertJson([
+                'id' => $this->client->id,
+                'name' => 'Test Client',
+                'description' => 'Description of Test Client',
+                'logo' => 'test_client_logo.png',
+                'country' => 'Poland',
+                'email' => 'test_client@example.com',
+            ]);
+    }
+
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_create_a_client()
     {
         $data = [
@@ -77,9 +91,7 @@ class ClientTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_update_a_client()
     {
 
@@ -101,9 +113,7 @@ class ClientTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_delete_a_client()
     {
         $response = $this->withHeaders([

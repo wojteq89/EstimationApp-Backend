@@ -37,9 +37,7 @@ class UserTest extends TestCase
         $this->adminToken = $response->json('token');
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_fetch_users()
     {
         $response = $this->withHeaders([
@@ -49,9 +47,7 @@ class UserTest extends TestCase
         $response->assertStatus(200);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_show_a_user()
     {
         $user = User::factory()->create();
@@ -67,9 +63,7 @@ class UserTest extends TestCase
             ]);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_create_a_user()
     {
         $data = [
@@ -89,9 +83,7 @@ class UserTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_update_a_user()
     {
         $user = User::factory()->create();
@@ -115,9 +107,7 @@ class UserTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_delete_a_user()
     {
         $user = User::factory()->create();

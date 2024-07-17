@@ -64,9 +64,7 @@ class EstimationTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_fetch_estimations()
     {
         $response = $this->withHeaders([
@@ -76,9 +74,7 @@ class EstimationTest extends TestCase
         $response->assertStatus(200);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_show_an_estimation()
     {
         $response = $this->withHeaders([
@@ -91,10 +87,33 @@ class EstimationTest extends TestCase
                 'name' => 'Test Estimation',
             ]);
     }
+    
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function it_can_create_an_estimation()
+    {
+        $data = [
+            'name' => 'New Estimation',
+            'description' => 'Description of New Estimation',
+            'project_id' => $this->project->id,
+            'date' => now()->format('Y-m-d'),
+            'type' => 'hourly',
+            'amount' => 1200,
+        ];
 
-    /**
-     * @test
-     */
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $this->token,
+        ])->postJson("{$this->baseUrl}/api/estimations", $data);
+
+        $response->assertStatus(201);
+        $this->assertDatabaseHas('estimations', [
+            'name' => 'New Estimation',
+            'description' => 'Description of New Estimation',
+            'project_id' => $this->project->id,
+            'amount' => 1200,
+        ]);
+    }
+
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_update_an_estimation()
     {
         $data = [
@@ -118,9 +137,7 @@ class EstimationTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_delete_an_estimation()
     {
         $response = $this->withHeaders([
