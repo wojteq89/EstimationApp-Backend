@@ -17,7 +17,19 @@ class Estimation extends Model
         });
 
         static::updated(function ($estimation) {
-            $estimation->updateProjectEstimationSum();
+            if ($estimation->isDirty('project_id')) {
+                $oldProject = $estimation->getOriginal('project_id');
+                $newProject = $estimation->project_id;
+                
+                if (!is_null($oldProject)) {
+                    $oldProjectInstance = Project::find($oldProject);
+                    if ($oldProjectInstance) {
+                        $oldProjectInstance->updateEstimationSum();
+                    }
+                }
+                
+                $estimation->updateProjectEstimationSum();
+            }
         });
 
         static::deleted(function ($estimation) {
@@ -29,9 +41,7 @@ class Estimation extends Model
     {
         $project = $this->project;
         if ($project) {
-            $project->update([
-                'estimation' => $project->estimations()->sum('amount')
-            ]);
+            $project->updateEstimationSum();
         }
     }
 
